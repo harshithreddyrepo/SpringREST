@@ -11,6 +11,14 @@ public class LaunchJacksonAPI1 {
 		Alien alien1 = new Alien(752, "Rathan", "Warangal");
 		Alien alien2 = new Alien(763, "Lokesh", "Warangal");
 		
+		Course c1=new Course(101,"Java", 33.3);
+		Course c2=new Course(102, "Python", 42.5);
+		Course c3=new Course(103, "JS", 45.7);
+		
+		alien.setCourse(c1);
+		alien1.setCourse(c2);
+		alien2.setCourse(c3);
+		
 		List<Alien> aliens=new ArrayList<>();
 		aliens.add(alien);
 		aliens.add(alien1);
@@ -29,7 +37,10 @@ public class LaunchJacksonAPI1 {
 		
 		// JSON to Java Object
 		
-		Alien val = objectMapper.readValue(new File("json/sample.json"), Alien.class);
+//		Alien val = objectMapper.readValue(new File("json/sample.json"), Alien.class);
+//		System.out.println(val);
+		
+		Alien val = objectMapper.readValue(new File("json/complex_sample.json"), Alien.class);
 		System.out.println(val);
 	}
 
