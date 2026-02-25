@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.telusko.TicketBookingApp.model.Tourist;
 import com.telusko.TicketBookingApp.service.ITouristManagement;
-import com.telusko.TicketBookingApp.service.TouristNotFoundException;
+
 
 @RestController
 @RequestMapping("api")
@@ -41,26 +41,13 @@ public class TouristController {
 		return responseEntity;
 	}
 	
-	@GetMapping("/fetchTourist/{id}")
-	public ResponseEntity<String> findTouristById(@PathVariable("id") Integer id){
-		Tourist tourist = service.fetchTourist(id);
-		
-		if(tourist==null) {
-			return new ResponseEntity<>("Tourist with the given id doesn't exist", HttpStatus.OK);
-		}
-		
-		return new ResponseEntity<>(tourist.getName(), HttpStatus.OK);
-	}
+
 	
-	@GetMapping("/fetchTouristExcep/{id}")
+	@GetMapping("/fetchTourist/{id}")
 	public ResponseEntity<?> findTouristByIdExcep(@PathVariable("id") Integer id){
 		
-		try {
 			Tourist tourist = service.fetchTouristExcep(id);
 			return new ResponseEntity<>(tourist, HttpStatus.OK);
-		}catch(TouristNotFoundException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
 		
 	}
 	
@@ -72,34 +59,28 @@ public class TouristController {
 	
 	@PutMapping("/update")
 	public ResponseEntity<String> updateTouristInfo(@RequestBody Tourist tourist){
-		try {
+		
 			service.uptadeTouristInfo(tourist);
 			return new ResponseEntity<>("Tourist info updated successfully", HttpStatus.OK);
-		}catch(TouristNotFoundException e){
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
+		
 	}
 	
 	@PatchMapping("/updateBudget/{id}/{budget}")
 	public ResponseEntity<String> updateBudget(@PathVariable("id")Integer id, @PathVariable("budget") Double budget){
-		try {
+		
 			String msg = service.updateTouristBudget(id, budget);
 			return new ResponseEntity<>(msg, HttpStatus.OK);
-		}catch(TouristNotFoundException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
+		
 		
 	}
 
 	
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> deleteTourist( @PathVariable("id") Integer id){
-		try {
+		
 			String msg = service.removeTourist(id);
 			return new ResponseEntity<>(msg, HttpStatus.OK);
-		}catch(TouristNotFoundException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
+		
 	}
 	
 	

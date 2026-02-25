@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.telusko.TicketBookingApp.dao.TouristRepo;
+import com.telusko.TicketBookingApp.exception.TouristNotFoundException;
 import com.telusko.TicketBookingApp.model.Tourist;
 
 @Service
@@ -79,7 +80,7 @@ public class TouristManagementImpl implements ITouristManagement {
 			repo.deleteById(id);
 			return "Tourist with the id "+id+" is deleted.";
 		}else {
-			throw new TouristNotFoundException("Tourist with the given id "+id+" not found");
+			throw new TouristNotFoundException("Tourist with the given id "+id+" not found to delete");
 		}
 	}
 }
