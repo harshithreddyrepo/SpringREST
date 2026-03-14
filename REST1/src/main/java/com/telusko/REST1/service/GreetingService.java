@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 
+import com.telusko.REST1.model.User;
+
 @Service
 public class GreetingService implements IGreetingService{
 
@@ -22,6 +24,13 @@ public class GreetingService implements IGreetingService{
 			wish="Good Night";
 		}
 		return wish;
+	}
+
+	@Override
+	public String registerUser(User user) {
+		// TODO Auto-generated method stub
+		String msg="User registerd with id:"+user.getId();
+		return msg;
 	}
 
 }
